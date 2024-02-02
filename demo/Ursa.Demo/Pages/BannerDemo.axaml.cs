@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
@@ -46,6 +48,15 @@ public class BannerDemoViewModel : ViewModelBase
         get => _bordered;
         set => SetProperty(ref _bordered, value);
     }
+    
+    public List<double> Items { get; set; }
+    private double _item;
+
+    public double Item
+    {
+        get => _item;
+        set => SetProperty(ref _item, value);
+    }
 
     public BannerDemoViewModel()
     {
@@ -53,5 +64,6 @@ public class BannerDemoViewModel : ViewModelBase
         {
             NotificationType.Information, NotificationType.Success, NotificationType.Warning, NotificationType.Error
         };
+        Items = new List<double>(Enumerable.Range(0, 1000).Select(a => a * 1.0));
     }
 }

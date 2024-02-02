@@ -6,13 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Ursa.Demo.Pages"
     xmlns:u="https://irihi.tech/ursa"
+    x:CompileBindings="True"
+    x:DataType="pages:BannerDemoViewModel"
     mc:Ignorable="d">
     <Design.DataContext>
         <pages:BannerDemoViewModel />
     </Design.DataContext>
     <StackPanel Spacing="20">
         <Grid ColumnDefinitions="*, 300">
-            <Grid Grid.Column="0">
+            <StackPanel Grid.Column="0">
                 <Border Margin="20">
                     <u:Banner
                         Classes.Bordered="{Binding Bordered}"
@@ -20,7 +22,28 @@
                         Header="Welcome to Ursa"
                         Type="{Binding SelectedType}" />
                 </Border>
-            </Grid>
+                <TextBlock Text="Hello" />
+                <u:SelectionControl ItemsSource="{Binding Items}" SelectedItem="{Binding Item}">
+                    <u:SelectionControl.ItemTemplate>
+                        <DataTemplate DataType="x:Double">
+                            <TextBlock
+                                Width="{Binding}"
+                                Height="30"
+                                Text="{Binding}"
+                                Background="Transparent" />
+                        </DataTemplate>
+                    </u:SelectionControl.ItemTemplate>
+                    <u:SelectionControl.ItemContainerTheme>
+                        <ControlTheme TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </ControlTemplate>
+                            </Setter>
+                        </ControlTheme>
+                    </u:SelectionControl.ItemContainerTheme>
+                </u:SelectionControl>
+            </StackPanel>
             <Border Grid.Column="1" VerticalAlignment="Top">
                 <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
                     <Label

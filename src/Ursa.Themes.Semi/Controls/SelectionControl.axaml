@@ -1,0 +1,23 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:u="https://irihi.tech/ursa">
+    <!-- Add Resources Here -->
+    <ControlTheme x:Key="{x:Type u:SelectionControl}" TargetType="u:SelectionControl">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <WrapPanel></WrapPanel>
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="u:SelectionControl">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Border Name="background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray"></Border>
+                    <Canvas Width="{Binding #background.Bounds.Width}" Height="{Binding #background.Bounds.Height}">
+                        <Border Name="Indicator" Background="White" CornerRadius="8" ></Border>
+                    </Canvas>
+                    <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"></ItemsPresenter>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
