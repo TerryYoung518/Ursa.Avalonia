@@ -18,6 +18,7 @@ public class CoercePanel: Panel
     private bool _inCoercing;
     
     public event EventHandler<object?>? RequestCoerce;
+    
     public void SetLength(Dictionary<string, double> values)
     {
         _coercedValues = values;
@@ -33,11 +34,12 @@ public class CoercePanel: Panel
 
     protected override void OnMeasureInvalidated()
     {
-        base.OnMeasureInvalidated();
         if (_inCoercing)
         {
             return;
         }
+        base.OnMeasureInvalidated();
+
         foreach (var child in Children)
         {
             if(GetCoerceGroup(child) is { } group)
