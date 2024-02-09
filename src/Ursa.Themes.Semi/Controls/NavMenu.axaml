@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:u="https://irihi.tech/ursa"
+                    xmlns:panels="clr-namespace:Ursa.Controls.Panels;assembly=Ursa">
+    <!-- Add Resources Here -->
+    <ControlTheme TargetType="u:NavMenu" x:Key="{x:Type u:NavMenu}">
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <panels:HorizontalCoercePanelRoot/>
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="u:NavMenu">
+                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}"></ItemsPresenter>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    
+    <ControlTheme TargetType="u:NavMenuItem" x:Key="{x:Type u:NavMenuItem}">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="u:NavMenuItem">
+                <panels:CoercePanel Name="{x:Static u:NavMenuItem.PART_CoercePanel}">
+                    <Rectangle Width="10" Height="10" Fill="Red"></Rectangle>
+                    <TextBlock Text="Hello World"></TextBlock>
+                    <Ellipse Width="15" Height="15" Fill="Yellow"></Ellipse>
+                </panels:CoercePanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

@@ -55,7 +55,12 @@ public class CoercePanel: Panel
         var size = base.ArrangeOverride(finalSize);
         foreach (var child in Children)
         {
-            if (_coercedValues.TryGetValue(GetCoerceGroup(child), out double width))
+            var key = GetCoerceGroup(child);
+            if (key is null)
+            {
+                child.Arrange(new Rect(new Point(), child.DesiredSize));
+            }
+            else if (_coercedValues.TryGetValue(GetCoerceGroup(child), out double width))
             {
                 child.Arrange(child.Bounds.WithWidth(width));
             }

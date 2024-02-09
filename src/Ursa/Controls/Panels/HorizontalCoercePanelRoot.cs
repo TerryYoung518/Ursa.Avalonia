@@ -15,14 +15,18 @@ public class HorizontalCoercePanelRoot: Panel
         {
             if (child is ICoercePanelContainer container)
             {
-                container.CoercePanel.RequestCoerce += CoercePanel_RequestCoerce;
+                if (container.CoercePanel is not null)
+                {
+                    container.CoercePanel.RequestCoerce += CoercePanel_RequestCoerce;
+                }
             }
         }
     }
 
     private void CoercePanel_RequestCoerce(object sender, object? e)
     {
-        
+        InvalidateMeasure();
+        InvalidateArrange();
         
     }
 
@@ -33,21 +37,26 @@ public class HorizontalCoercePanelRoot: Panel
         {
             if (child is ICoercePanelContainer container)
             {
-                var length = container.CoercePanel.GetLength();
+                var length = container.CoercePanel?.GetLength();
             }
         }
-        return base.MeasureOverride(availableSize);
+        return new Size(100, 120);
     }
 
     protected override Size ArrangeOverride(Size finalSize)
     {
+        Rect rect = new Rect(new Point(), new Size());
         foreach (var child in Children)
         {
             if (child is ICoercePanelContainer container)
             {
-                container.CoercePanel.SetLength(new Dictionary<string, double>());
+                rect = rect.WithHeight(40);
+                rect = rect.WithWidth(100);
+                container.CoercePanel?.SetLength(new Dictionary<string, double>());
+                child.Arrange(rect);
+                rect = rect.WithY(rect.Y + 40);
             }
         }
-        return base.ArrangeOverride(finalSize);
+        return finalSize;
     }
 }
