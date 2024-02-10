@@ -7,6 +7,7 @@ namespace Ursa.Controls.Panels;
 public class HorizontalCoercePanelRoot: Panel
 {
     public Dictionary<string, GridLength> _maps;
+    public ColumnDefinitions? ColumnDefinitions { get; set; }
 
     protected override void OnLoaded(RoutedEventArgs e)
     {

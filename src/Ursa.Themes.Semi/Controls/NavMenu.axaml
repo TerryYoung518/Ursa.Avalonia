@@ -6,7 +6,15 @@
     <ControlTheme TargetType="u:NavMenu" x:Key="{x:Type u:NavMenu}">
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
-                <panels:HorizontalCoercePanelRoot/>
+                <panels:HorizontalCoercePanelRoot>
+                    <panels:HorizontalCoercePanelRoot.ColumnDefinitions>
+                        <ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="Icon" Width="Auto"/>
+                            <ColumnDefinition SharedSizeGroup="Header" Width="*"/>
+                            <ColumnDefinition SharedSizeGroup="Arrow" Width="Auto"/>
+                        </ColumnDefinitions>
+                    </panels:HorizontalCoercePanelRoot.ColumnDefinitions>
+                </panels:HorizontalCoercePanelRoot>
             </ItemsPanelTemplate>
         </Setter>
         <Setter Property="Template">
@@ -20,9 +28,9 @@
         <Setter Property="Template">
             <ControlTemplate TargetType="u:NavMenuItem">
                 <panels:CoercePanel Name="{x:Static u:NavMenuItem.PART_CoercePanel}">
-                    <Rectangle Width="10" Height="10" Fill="Red"></Rectangle>
-                    <TextBlock Text="Hello World"></TextBlock>
-                    <Ellipse Width="15" Height="15" Fill="Yellow"></Ellipse>
+                    <Rectangle Width="10" Height="10" Fill="Red" panels:CoercePanel.CoerceGroup="Icon"></Rectangle>
+                    <TextBlock Text="Hello World" panels:CoercePanel.CoerceGroup="Header"></TextBlock>
+                    <Ellipse Width="15" Height="15" Fill="Yellow" panels:CoercePanel.CoerceGroup="Arrow"></Ellipse>
                 </panels:CoercePanel>
             </ControlTemplate>
         </Setter>
