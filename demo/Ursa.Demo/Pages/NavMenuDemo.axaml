@@ -11,5 +11,6 @@
             <u:NavMenuItem></u:NavMenuItem>
             <u:NavMenuItem></u:NavMenuItem>
         </u:NavMenu>
+        <u:NavMenuItem></u:NavMenuItem>
     </StackPanel>
 </UserControl>
