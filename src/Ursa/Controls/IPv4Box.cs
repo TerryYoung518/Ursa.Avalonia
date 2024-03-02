@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
@@ -43,7 +44,7 @@ public class IPv4Box: TemplatedControl
     private TextPresenter? _currentActivePresenter;
     
     public static readonly StyledProperty<IPAddress?> IPAddressProperty = AvaloniaProperty.Register<IPv4Box, IPAddress?>(
-        nameof(IPAddress));
+        nameof(IPAddress), defaultBindingMode: BindingMode.TwoWay);
     public IPAddress? IPAddress
     {
         get => GetValue(IPAddressProperty);
@@ -115,6 +116,19 @@ public class IPv4Box: TemplatedControl
         _presenters[1] = _secondText;
         _presenters[2] = _thirdText;
         _presenters[3] = _fourthText;
+        if (this.IPAddress != null)
+        {
+            var sections = IPAddress.ToString().Split('.');
+            for (int i = 0; i < 4; i++)
+            {
+                var presenter = _presenters[i];
+                if (presenter != null)
+                {
+                    presenter.Text = sections[i];
+                }
+            }
+            ParseBytes(ShowLeadingZero);
+        }
     }
     
     protected override void OnKeyDown(KeyEventArgs e)
